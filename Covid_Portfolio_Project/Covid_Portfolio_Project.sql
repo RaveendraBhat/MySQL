@@ -1,3 +1,6 @@
+-- Covid 19 Data Exploration 
+
+-- Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
 
 select * 
 from PortfolioProject..CovidDeaths
@@ -7,12 +10,14 @@ order by 3,4
 --from PortfolioProject..CovidVaccinations
 --order by 3,4
 
+-- Select Data that we are going to be starting with
+
 select location, date, total_cases, new_cases, total_deaths, population
 from PortfolioProject..CovidDeaths
 where continent is not null
 order by 1,2
 
--- shows likelihood of dying if you contract covid 19 in your country
+-- Shows likelihood of dying if you contract Covid 19 in your country
 
 select location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 from PortfolioProject..CovidDeaths
@@ -20,7 +25,7 @@ where location like '%states%'
 and continent is not null
 order by 1,2
 
--- shows what percentage of population got covid
+-- Shows what percentage of population got Covid
 
 select location, date, population, total_cases, (total_cases/population)*100 as CovidPercentage
 from PortfolioProject..CovidDeaths
@@ -28,7 +33,7 @@ where location like '%states%'
 and continent is not null
 order by 1,2
 
--- looking at countries with highest infection rate compared to population
+-- Looking at countries with highest infection rate compared to population
 
 select location, population, max(total_cases) as HighestInfectionCount, max(total_cases/population)*100 as PercentPopulationInfected
 from PortfolioProject..CovidDeaths
@@ -36,7 +41,7 @@ where continent is not null
 group by location, population
 order by PercentPopulationInfected desc
 
--- showing countries with highest death count per population
+-- Showing countries with highest death count per population
 
 select location, max(cast(total_deaths as int)) as DeathCount
 from PortfolioProject..CovidDeaths
@@ -44,7 +49,7 @@ where continent is not null
 group by location
 order by DeathCount desc
 
--- showing continents with the highest death count
+-- Showing continents with the highest death count
 
 select continent, max(cast(total_deaths as int)) as DeathCount
 from PortfolioProject..CovidDeaths
@@ -52,7 +57,7 @@ where continent is not null
 group by continent
 order by DeathCount desc
 
--- global numbers
+-- Global numbers
 
 select date, sum(new_cases) as totalCases, sum(CAST(new_deaths as int)) as totalDeaths,
 (sum(CAST(new_deaths as int))/sum(new_cases))*100 as DeathPercent 
@@ -125,7 +130,7 @@ where dea.continent is not null
 select *, (RollingPeopleVaccinated/population)*100
 from #PercentPopulationVaccinated
 
--- creating view to store data 
+-- Creating view to store data 
 
 -- drop view PercentPopulationVaccinated
 
