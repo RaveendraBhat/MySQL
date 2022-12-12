@@ -16,7 +16,7 @@ SELECT p_name
 FROM product
 WHERE price > 250;
 
--- Write the select statement which gives product name, cost, price and profit. (profit formula is price – cost)
+-- Write the select statement which gives product name, cost, price and profit. (profit formula is price â€“ cost)
 
 SELECT p_name,cost,price, price-cost AS profit
 FROM product
@@ -51,7 +51,7 @@ SELECT p_name
 FROM product 
 WHERE EXTRACT(YEAR FROM launch_date) = 2010
 
--- Display the products which name starts with either ‘S’ or ‘W’ and which belongs to Stationary and cost more than 300 Rs
+-- Display the products which name starts with either â€˜Sâ€™ or â€˜Wâ€™ and which belongs to Stationary and cost more than 300 Rs
 
 SELECT p_name 
 FROM product
